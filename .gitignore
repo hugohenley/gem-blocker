@@ -26,6 +26,9 @@
 /test/version_tmp/
 /tmp/
 
+#RubyMine
+/.idea
+
 ## Specific to RubyMotion:
 .dat*
 .repl_history
