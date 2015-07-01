@@ -14,12 +14,13 @@
 ActiveRecord::Schema.define(version: 20150701211437) do
 
   create_table "commits", force: :cascade do |t|
-    t.string   "hash"
+    t.string   "hash_id"
     t.string   "title"
     t.string   "author_name"
     t.string   "author_email"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "commit_created_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "project_id"
   end
 
