@@ -26,6 +26,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #REST Client
 gem 'rest-client'
 
+#Debugger
+gem 'pry'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

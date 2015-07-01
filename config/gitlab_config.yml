@@ -5,7 +5,7 @@
 
 # # # # # # # # # # Example # # # # # # # # # # # #
 # development:                                    #
-#   base_ws_url: "https://mydomain.com/api/v3"    #
+#   base_ws_url: "https://mydomain.com/api/v3/"    #
 #   projects_path: "projects"                     #
 #   private_token: "892021AISjAS"                 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #

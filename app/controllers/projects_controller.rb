@@ -9,7 +9,8 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(params[:project])
+    hook_params = ProjectHookParser.new(params).to_param!
+    @project = Project.new(hook_params)
     if @project.save
       redirect_to projects_path, notice: 'Projecto criado com sucesso!'
     else

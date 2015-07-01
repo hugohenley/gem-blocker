@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150701153141) do
+ActiveRecord::Schema.define(version: 20150701180211) do
 
   create_table "commits", force: :cascade do |t|
     t.string   "hash"
@@ -23,12 +23,22 @@ ActiveRecord::Schema.define(version: 20150701153141) do
     t.integer  "project_id"
   end
 
+  create_table "in_use_gems", force: :cascade do |t|
+    t.string   "name"
+    t.string   "version"
+    t.string   "description"
+    t.integer  "commit_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string   "name"
     t.string   "ssh_url_to_repo"
     t.string   "http_url_to_repo"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "gitlab_id"
   end
 
 end

@@ -3,14 +3,16 @@ require 'rest-client'
 class GitlabWS
   attr_reader :id
 
-  URL = "https://sistemas.uff.br/sti/git/api/v3/"
-
-  def initialize(id)
+  def initialize(id = nil)
     @id = id
   end
 
   def project_info
-    RestClient.get URL + "projects", {:params => {:id => @id, :private_token => GITLAB_TOKEN } }
+    RestClient.get GITLAB_WS_URL + "projects/#{@id}", {:private_token => GITLAB_TOKEN}
+  end
+
+  def all_projects_info
+    JSON(RestClient.get GITLAB_WS_URL + "projects/all", {:per_page => 999, :private_token => GITLAB_TOKEN })
   end
 
 end
