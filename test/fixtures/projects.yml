@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  ssh_url_to_repo: MyString
+  http_url_to_repo: MyString
+
+two:
+  name: MyString
+  ssh_url_to_repo: MyString
+  http_url_to_repo: MyString
