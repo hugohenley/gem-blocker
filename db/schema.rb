@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150701180211) do
+ActiveRecord::Schema.define(version: 20150701211437) do
 
   create_table "commits", force: :cascade do |t|
     t.string   "hash"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20150701180211) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "gitlab_id"
+    t.string   "description"
   end
 
 end

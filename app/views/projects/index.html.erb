@@ -1,0 +1,24 @@
+<%= button_to "Sync Projects", project_syncs_path, class: "btn btn-primary" %>
+
+<% unless @projects.empty? %>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>SSH URL</th>
+        <th>HTTP URL</th>
+        <th>description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @projects.each do |project| %>
+          <tr>
+            <td><%= project.name %></td>
+            <td><%= project.ssh_url_to_repo %></td>
+            <td><%= project.http_url_to_repo %></td>
+            <td><%= project.description %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% end %>

@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   root 'application#index'
 
   resources :projects
+  resources :project_syncs
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
