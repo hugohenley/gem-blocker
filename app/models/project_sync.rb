@@ -1,18 +1,22 @@
 class ProjectSync
 
   def self.import!
-    projects = GitlabWS.new.all_projects_info
-    projects.each do |project|
-      unless ProjectSync.already_imported?(project)
-        p = Project.new
-        p.gitlab_id = project["id"]
-        p.name = project["name"]
-        p.description = project["description"]
-        p.ssh_url_to_repo = project["ssh_url_to_repo"]
-        p.http_url_to_repo = project["http_url_to_repo"]
-        p.save!
+    begin
+      projects = GitlabWS.new.all_projects_info
+      projects.each do |project|
+        unless ProjectSync.already_imported?(project)
+          p = Project.new
+          p.gitlab_id = project["id"]
+          p.name = project["name"]
+          p.description = project["description"]
+          p.ssh_url_to_repo = project["ssh_url_to_repo"]
+          p.http_url_to_repo = project["http_url_to_repo"]
+          p.save!
+        end
+        ProjectSync.import_commits(project)
       end
-      ProjectSync.import_commits(project)
+    rescue SocketError
+      false
     end
   end
 

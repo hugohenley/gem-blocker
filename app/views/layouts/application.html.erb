@@ -47,12 +47,17 @@
             </ul>
           </li>
         </ul>
-      </div><!--/.nav-collapse -->
-    </div><!--/.container-fluid -->
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+    <!--/.container-fluid -->
   </nav>
 
-<div class="container">
-  <%= yield %>
+  <div class="container">
+    <%= flash_messages %>
+
+    <%= yield %>
+  </div>
 </div>
 <!-- /container -->
 <!-- Bootstrap core JavaScript
