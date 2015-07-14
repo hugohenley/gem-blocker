@@ -1,0 +1,26 @@
+<h1><%= @project.name %></h1>
+
+<% if @project.commits %>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Author Name</th>
+        <th>Commit Message</th>
+        <th>Commited at</th>
+        <th>Hash ID</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @project.commits.each do |commit| %>
+          <tr>
+            <td><%= commit.author_name %></td>
+            <td><%= commit.title %></td>
+            <td><%= commit.commit_created_at %></td>
+            <td><%= commit.hash_id %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% else %>
+    <span>No commits associated to this project.</span>
+<% end %>
