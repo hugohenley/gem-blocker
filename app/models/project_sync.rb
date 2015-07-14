@@ -22,6 +22,7 @@ class ProjectSync
 
   def self.import_commits(project)
     commits = GitlabWS.new(project["id"]).project_commits
+    return if commits.empty?
     commits.each do |commit|
       c = Commit.new
       c.hash_id = commit["id"]
