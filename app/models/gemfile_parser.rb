@@ -1,13 +1,12 @@
 class GemfileParser
-  attr_reader :file_path
+  attr_reader :file
 
-  def initialize(file_path)
-    @file_path = file_path
+  def initialize(file)
+    @file = file
   end
 
   def parse
-    file = File.open(@file_path).readlines.join("")
-    lockfile = Bundler::LockfileParser.new(file)
+    lockfile = Bundler::LockfileParser.new(@file)
     lockfile_gems = {}
     lockfile.specs.each { |s| lockfile_gems[s.name] = s.version.version }
     lockfile_gems

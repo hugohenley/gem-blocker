@@ -1,10 +1,11 @@
 require 'rest-client'
 
 class GitlabWS
-  attr_reader :id
+  attr_reader :id, :commit_sha
 
-  def initialize(id = nil)
+  def initialize(id = nil, sha = nil)
     @id = id
+    @commit_sha = sha
   end
 
   def project_info
@@ -21,7 +22,10 @@ class GitlabWS
     rescue Exception
       return []
     end
+  end
 
+  def raw_gemfilelock
+    RestClient.get GITLAB_WS_URL + "projects/#{@id}/repository/blobs/#{@commit_sha}", {:params => {:private_token => GITLAB_TOKEN, :filepath => "Gemfile.lock"}}
   end
 
 end
