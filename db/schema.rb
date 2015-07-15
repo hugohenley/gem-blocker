@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150701211437) do
+ActiveRecord::Schema.define(version: 20150715213958) do
 
   create_table "commits", force: :cascade do |t|
     t.string   "hash_id"
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(version: 20150701211437) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.integer  "project_id"
+  end
+
+  create_table "gemblockers", force: :cascade do |t|
+    t.integer  "rubygem_id"
+    t.integer  "version_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "in_use_gems", force: :cascade do |t|
@@ -41,6 +48,32 @@ ActiveRecord::Schema.define(version: 20150701211437) do
     t.datetime "updated_at",       null: false
     t.integer  "gitlab_id"
     t.string   "description"
+  end
+
+  create_table "rubygems", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "current_version"
+    t.string   "authors"
+    t.string   "info"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "versionblockers", force: :cascade do |t|
+    t.integer  "version_id"
+    t.integer  "gemblocker_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "versions", force: :cascade do |t|
+    t.string   "number"
+    t.string   "summary"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "rubygem_id"
   end
 
 end

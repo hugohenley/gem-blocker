@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rubygem_id: 1
+  version_id: 1
+
+two:
+  rubygem_id: 1
+  version_id: 1
