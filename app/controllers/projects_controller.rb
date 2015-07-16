@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
 
   def index
-    @projects = Project.all
+    @projects = Project.includes(:commits).order("commits.commit_created_at DESC").group(:name)
   end
   
   def show

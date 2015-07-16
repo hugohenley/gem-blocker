@@ -14,66 +14,66 @@
 ActiveRecord::Schema.define(version: 20150715213958) do
 
   create_table "commits", force: :cascade do |t|
-    t.string   "hash_id"
-    t.string   "title"
-    t.string   "author_name"
-    t.string   "author_email"
+    t.string   "hash_id",           limit: 255
+    t.string   "title",             limit: 255
+    t.string   "author_name",       limit: 255
+    t.string   "author_email",      limit: 255
     t.datetime "commit_created_at"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.integer  "project_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "project_id",        limit: 4
   end
 
   create_table "gemblockers", force: :cascade do |t|
-    t.integer  "rubygem_id"
-    t.integer  "version_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "rubygem_id", limit: 4
+    t.integer  "version_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "in_use_gems", force: :cascade do |t|
-    t.string   "name"
-    t.string   "version"
-    t.string   "description"
-    t.integer  "commit_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "name",        limit: 255
+    t.string   "version",     limit: 255
+    t.string   "description", limit: 255
+    t.integer  "commit_id",   limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string   "name"
-    t.string   "ssh_url_to_repo"
-    t.string   "http_url_to_repo"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.integer  "gitlab_id"
-    t.string   "description"
+    t.string   "name",             limit: 255
+    t.string   "ssh_url_to_repo",  limit: 255
+    t.string   "http_url_to_repo", limit: 255
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "gitlab_id",        limit: 4
+    t.string   "description",      limit: 255
   end
 
   create_table "rubygems", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "current_version"
-    t.string   "authors"
-    t.string   "info"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "name",            limit: 255
+    t.string   "description",     limit: 255
+    t.string   "current_version", limit: 255
+    t.string   "authors",         limit: 255
+    t.string   "info",            limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "versionblockers", force: :cascade do |t|
-    t.integer  "version_id"
-    t.integer  "gemblocker_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "version_id",    limit: 4
+    t.integer  "gemblocker_id", limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "versions", force: :cascade do |t|
-    t.string   "number"
-    t.string   "summary"
-    t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "rubygem_id"
+    t.string   "number",      limit: 255
+    t.string   "summary",     limit: 255
+    t.string   "description", limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "rubygem_id",  limit: 4
   end
 
 end
