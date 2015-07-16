@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150715213958) do
+ActiveRecord::Schema.define(version: 20150716145858) do
 
   create_table "commits", force: :cascade do |t|
     t.string   "hash_id",           limit: 255
@@ -29,15 +29,6 @@ ActiveRecord::Schema.define(version: 20150715213958) do
     t.integer  "version_id", limit: 4
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
-  end
-
-  create_table "in_use_gems", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "version",     limit: 255
-    t.string   "description", limit: 255
-    t.integer  "commit_id",   limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
   end
 
   create_table "projects", force: :cascade do |t|
@@ -58,6 +49,15 @@ ActiveRecord::Schema.define(version: 20150715213958) do
     t.string   "info",            limit: 255
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+  end
+
+  create_table "used_gems", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "version",     limit: 255
+    t.string   "description", limit: 255
+    t.integer  "commit_id",   limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "versionblockers", force: :cascade do |t|

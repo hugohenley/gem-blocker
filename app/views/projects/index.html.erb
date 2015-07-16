@@ -6,7 +6,7 @@
       <tr>
         <th>Name</th>
         <th width="30%">Last Commit at</th>
-        <th>description</th>
+        <th>Commited by</th>
       </tr>
       </thead>
       <tbody>
@@ -14,7 +14,7 @@
           <tr>
             <td><%= link_to project.name, project_path(project) %></td>
             <td><%= last_commit_time(project) %></td>
-            <td><%= project.description %></td>
+            <td><%= last_commit_author(project) %></td>
           </tr>
       <% end %>
       </tbody>
