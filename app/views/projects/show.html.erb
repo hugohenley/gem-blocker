@@ -16,7 +16,7 @@
             <td><%= commit.author_name %></td>
             <td><%= commit.title %></td>
             <td><%= commit.commit_created_at %></td>
-            <td><%= commit.hash_id %></td>
+            <td><%= link_to commit.hash_id, commit_path(commit) %></td>
           </tr>
       <% end %>
       </tbody>

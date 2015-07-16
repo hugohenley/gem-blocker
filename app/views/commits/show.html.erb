@@ -1,0 +1,20 @@
+<div class="page-header">
+  <h2>Used Gems - <%= @commit.project.name %> - <%= @commit.hash_id %></h2>
+</div>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Version</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @commit.used_gems.each do |used_gem| %>
+      <tr>
+        <td><%= used_gem.name %></td>
+        <td><%= used_gem.version %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'application#index'
 
   resources :projects
+  resources :commits
   resources :project_syncs
 
 
