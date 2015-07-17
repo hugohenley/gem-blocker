@@ -16,6 +16,7 @@ class GitlabWS
     JSON(RestClient.get GITLAB_WS_URL + "projects/all", {:params => {:private_token => GITLAB_TOKEN, :per_page => 999}})
   end
 
+  # Last commit comes first
   def project_commits
     begin
       JSON(RestClient.get GITLAB_WS_URL + "projects/#{@id}/repository/commits", {:private_token => GITLAB_TOKEN})

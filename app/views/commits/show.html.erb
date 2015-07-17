@@ -7,6 +7,8 @@
   <tr>
     <th>Name</th>
     <th>Version</th>
+    <th>Diff (Actual - Last)</th>
+    <th>Compliance</th>
   </tr>
   </thead>
   <tbody>
@@ -14,6 +16,8 @@
       <tr>
         <td><%= used_gem.name %></td>
         <td><%= used_gem.version %></td>
+        <td><%= print_delta(used_gem) %></td>
+        <td><%=  %></td>
       </tr>
   <% end %>
   </tbody>

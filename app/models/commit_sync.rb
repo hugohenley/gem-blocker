@@ -12,7 +12,7 @@ class CommitSync
       c.commit_created_at = commit["created_at"]
       c.project_id = Project.find_by_gitlab_id(git_project_info["id"]).id
       c.save!
-      GemImporter.new(git_project_info["id"], c).import
+      GemImporter.new(git_project_info["id"], c, commits).import
     end
   end
 
