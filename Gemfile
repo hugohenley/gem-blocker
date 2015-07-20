@@ -39,6 +39,7 @@ gem 'coveralls', require: false
 group :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
 end
 
 # Use ActiveModel has_secure_password

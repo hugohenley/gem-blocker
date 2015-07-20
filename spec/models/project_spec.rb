@@ -2,6 +2,10 @@ require "rails_helper"
 
 describe Project do
 
+  describe "associations" do
+    it { is_expected.to have_many(:commits) }
+  end
+
   describe '.already_imported?' do
     describe "based on gitlab project id" do
       before do

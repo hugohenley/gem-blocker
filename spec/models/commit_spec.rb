@@ -2,6 +2,10 @@ require "rails_helper"
 
 describe Commit do
 
+  describe "associations" do
+    it { is_expected.to have_many(:used_gems) }
+  end
+
   describe "given commits are saved from the last commited to first" do
     describe '#next' do
       it "returns the last commit (first created on database) when call next on the first commit" do
