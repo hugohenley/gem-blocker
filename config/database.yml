@@ -9,7 +9,7 @@ development:
   <<: *default
   database: gemblocker_development
   socket: /tmp/mysql.sock
-  
+
 test:
   <<: *default
   database: gemblocker_test
