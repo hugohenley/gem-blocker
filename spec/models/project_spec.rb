@@ -26,7 +26,7 @@ describe Project do
         expect(Project.already_imported?(@gitlab_incoming_hash)).to be true
       end
 
-      it "returns false if project does not exit on database" do
+      it "returns false if project does not exist on database" do
         @project = FactoryGirl.create :project, gitlab_id: 118
 
         expect(Project.already_imported?(@gitlab_incoming_hash)).to be false
