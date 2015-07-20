@@ -2,4 +2,7 @@ language: ruby
 rvm:
   - 2.2.2
 
+before_script:
+  - mysql -e 'create database gemblocker_test;'
+
 script: bundle exec rspec
