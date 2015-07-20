@@ -4,12 +4,12 @@ default: &default
   pool: 5
   username: root
   password:
-  socket: /tmp/mysql.sock
 
 development:
   <<: *default
   database: gemblocker_development
-
+  socket: /tmp/mysql.sock
+  
 test:
   <<: *default
   database: gemblocker_test

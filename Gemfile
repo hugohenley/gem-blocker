@@ -28,15 +28,18 @@ gem 'rest-client'
 #Debugger
 gem 'pry'
 
-#Test
-gem 'rspec-rails'
-
 #Database
 gem 'mysql2'
 
+#Fake data for seeds and tests
 gem 'faker'
 
-gem 'factory_girl_rails'
+gem 'coveralls', require: false
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'rspec-rails'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
