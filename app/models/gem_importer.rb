@@ -18,7 +18,7 @@ class GemImporter
         rubygem = Rubygem.where(name: gem_name).first_or_create
         version = Version.where(number: commit_gems[gem_name], rubygem_id: rubygem.id).first_or_create
 
-        diff = GemComparer.new(@git_project_id, commits).compare_with_last(rubygem, @commit.hash_id)
+        diff = GemComparer.new(commits).compare_with_last(rubygem, @commit.hash_id)
 
         UsedGem.new(commit_id: @commit.id, name: rubygem.name, version: version.number, diff: diff).save
       end

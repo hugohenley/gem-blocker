@@ -1,9 +1,8 @@
 class GemComparer
 
-  attr_reader :git_project_id, :array_of_commits
+  attr_reader :array_of_commits
 
-  def initialize(git_project_id, array_of_commits)
-    @git_project_id = git_project_id
+  def initialize(array_of_commits)
     @array_of_commits = array_of_commits
   end
 
