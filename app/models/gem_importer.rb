@@ -23,8 +23,6 @@ class GemImporter
         UsedGem.new(commit_id: @commit.id, name: rubygem.name, version: version.number, diff: diff).save
       end
     rescue Exception => e
-      puts e.message
-      puts "*********************** PROJETO #{@git_project_id} NAO TEM GEMFILE *******************************"
       false
     end
   end

@@ -54,7 +54,33 @@ describe Commit do
         expect(@first_commit.previous).to be_nil
       end
     end
-
   end
+
+  describe "if the commit was already imported" do
+    before do
+      @commit = {"id" => "d179866018c21022006f10061a6db74fe18860ce",
+                 "short_id" => "d179866018c", "title" => "CLOSES #1: Title of the commit",
+                 "author_name" => "Hugo Henley", "author_email" => "hugohenley@example.com",
+                 "created_at" => "2015-05-21T17:28:53-03:00"}
+      FactoryGirl.create :commit, hash_id: "d179866018c21022006f10061a6db74fe18860ce"
+    end
+    it ".already_imported? must be true" do
+      expect(Commit.already_imported?(@commit)).to be true
+    end
+  end
+
+  describe "if the commit was not imported" do
+    before do
+      @commit = {"id" => "d179866018c21022006f10061a6db74fe18860ce",
+                 "short_id" => "d179866018c", "title" => "CLOSES #1: Title of the commit",
+                 "author_name" => "Hugo Henley", "author_email" => "hugohenley@example.com",
+                 "created_at" => "2015-05-21T17:28:53-03:00"}
+      FactoryGirl.create :commit, hash_id: "6a47a96db589f852330cb3755f57025e5a38382d"
+    end
+    it ".already_imported? must be false" do
+      expect(Commit.already_imported?(@commit)).to be false
+    end
+  end
+
 
 end

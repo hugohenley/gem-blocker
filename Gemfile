@@ -34,13 +34,13 @@ gem 'mysql2'
 #Fake data for seeds and tests
 gem 'faker'
 
-gem 'coveralls', require: false
-
 group :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
+  gem 'coveralls', require: false
+  gem 'simplecov', :require => false
 end
 
 # Use ActiveModel has_secure_password
