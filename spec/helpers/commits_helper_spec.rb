@@ -4,7 +4,7 @@ describe CommitsHelper do
   describe "should print the right image" do
     it "when the new commit has the same version of the last commit" do
       used_gem = FactoryGirl.build :used_gem, diff: "equal"
-      
+
       expect(helper.print_delta(used_gem)).to be_eql("<img src=\"/assets/equal.png\" alt=\"Equal\" />")
     end
 
