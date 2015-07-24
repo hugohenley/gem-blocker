@@ -25,15 +25,15 @@ describe Project do
       end
 
       it "returns true if project already exists on database" do
-        @project = FactoryGirl.create :project, gitlab_id: 117
+        @project = FactoryGirl.create :project, gitproject_id: 117, server: "gitlab"
 
-        expect(Project.already_imported?(@gitlab_incoming_hash)).to be true
+        expect(Project.already_imported?(@gitlab_incoming_hash["id"], "gitlab")).to be true
       end
 
       it "returns false if project does not exist on database" do
-        @project = FactoryGirl.create :project, gitlab_id: 118
+        @project = FactoryGirl.create :project, gitproject_id: 118, server: "gitlab"
 
-        expect(Project.already_imported?(@gitlab_incoming_hash)).to be false
+        expect(Project.already_imported?(@gitlab_incoming_hash["id"], "gitlab")).to be false
       end
     end
 

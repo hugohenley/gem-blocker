@@ -52,7 +52,7 @@ describe GemComparer do
       ]
     end
 
-    it "#compare_with_last should return up" do
+    it "#compare_with_last should return down" do
       last_commit = FactoryGirl.create :commit, hash_id: "c0b920735042a8bc79704510b2e8e0ba020e0145"
       first_commit = FactoryGirl.create :commit, hash_id: "d79489b3eff1753b4b5b8822bc52adced4d5aa6a"
       rubygem = FactoryGirl.create :rubygem, name: "SyslogLogger"

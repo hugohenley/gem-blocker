@@ -1,0 +1,44 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # #
+# GitServer Web Service config file               #
+# Put the WS URL for each environment and server  #
+# # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# # # # # # # # # # Example # # # # # # # # # # # #
+# development:                                    #
+#   base_ws_url: "https://mydomain.com/api/v3/"   #
+#   private_token: "892021AISjAS"                 #
+# # # # # # # # # # # # # # # # # # # # # # # # # #
+
+gitlab:
+  development:
+    base_ws_url: "YOUR_BASE_WS_URL_HERE"
+    private_token: "YOUR_PRIVATE_TOKEN"
+
+  test:
+    base_ws_url: "YOUR_BASE_WS_URL_HERE"
+    private_token: "YOUR_PRIVATE_TOKEN"
+
+  staging:
+    base_ws_url: "YOUR_BASE_WS_URL_HERE"
+    private_token: "YOUR_PRIVATE_TOKEN"
+
+  production:
+    base_ws_url: "YOUR_BASE_WS_URL_HERE"
+    private_token: "YOUR_PRIVATE_TOKEN"
+
+github:
+  development:
+    base_ws_url: "YOUR_BASE_WS_URL_HERE"
+    private_token: "YOUR_PRIVATE_TOKEN"
+
+  test:
+    base_ws_url: "YOUR_BASE_WS_URL_HERE"
+    private_token: "YOUR_PRIVATE_TOKEN"
+
+  staging:
+    base_ws_url: "YOUR_BASE_WS_URL_HERE"
+    private_token: "YOUR_PRIVATE_TOKEN"
+
+  production:
+    base_ws_url: "YOUR_BASE_WS_URL_HERE"
+    private_token: "YOUR_PRIVATE_TOKEN"

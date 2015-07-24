@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe GitlabWS do
+describe GitlabServer do
   it { is_expected.to respond_to(:project_info) }
 
   it { is_expected.to respond_to(:all_projects_info) }

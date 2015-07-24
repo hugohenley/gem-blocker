@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150717024701) do
+ActiveRecord::Schema.define(version: 20150724191752) do
 
   create_table "commits", force: :cascade do |t|
     t.string   "hash_id",           limit: 255
@@ -37,8 +37,9 @@ ActiveRecord::Schema.define(version: 20150717024701) do
     t.string   "http_url_to_repo", limit: 255
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
-    t.integer  "gitlab_id",        limit: 4
+    t.integer  "gitproject_id",    limit: 4
     t.string   "description",      limit: 255
+    t.string   "server",           limit: 255
   end
 
   create_table "rubygems", force: :cascade do |t|
