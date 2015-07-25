@@ -15,6 +15,7 @@ class ProjectSync
             p.http_url_to_repo = git_project_info["http_url_to_repo"]
             p.server = server
             p.save!
+            $progress.increment
           end
         end
       end

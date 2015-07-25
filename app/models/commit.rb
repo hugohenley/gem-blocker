@@ -14,4 +14,12 @@ class Commit < ActiveRecord::Base
     Commit.where(hash_id: commit["id"]).any?
   end
 
+  def gitproject_id
+    self.project.gitproject_id
+  end
+
+  def commit_server
+    self.project.server
+  end
+
 end

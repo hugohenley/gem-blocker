@@ -22,9 +22,6 @@ class GemImporter
         UsedGem.new(commit_id: @commit.id, name: rubygem.name, version: version.number, diff: diff).save
       end
     rescue Exception => e
-      puts "******************************"
-      puts e.message
-      puts "******************************"
       false
     end
   end

@@ -12,7 +12,6 @@ class CommitSync
       c.commit_created_at = commit["created_at"]
       c.project_id = Project.where(gitproject_id: gitproject_id, server: server).first.id
       c.save!
-      GemImporter.new(gitproject_id, c, commits, server).import
     end
   end
 
