@@ -16,7 +16,6 @@ class ProjectSync
             p.server = server
             p.save!
           end
-          CommitSync.new.import_commits(git_project_info, server)
         end
       end
     rescue SocketError

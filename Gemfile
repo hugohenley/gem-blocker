@@ -25,6 +25,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #REST Client
 gem 'rest-client'
 
+# Colored output to console
+gem 'colorize'
 gem 'ruby-progressbar'
 
 #Debugger
