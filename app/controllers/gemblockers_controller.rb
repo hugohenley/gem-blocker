@@ -6,6 +6,7 @@ class GemblockersController < ApplicationController
 
   def new
     @gemblocker = Gemblocker.new
+    @gemblocker.blockedversions.build
   end
 
 
@@ -43,7 +44,7 @@ class GemblockersController < ApplicationController
 
   private
   def gemblocker_params
-    params.require(:gemblocker).permit(:gem, :version, :verification_type)
+    params.require(:gemblocker).permit(:gem, :verification_type, blockedversions_attributes: [:id, :number, :_destroy])
   end
 
 end

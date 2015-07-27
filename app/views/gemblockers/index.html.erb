@@ -8,7 +8,7 @@
       <thead>
       <tr>
         <th>Gem</th>
-        <th>Version</th>
+        <th>Blocked Versions</th>
         <th>Type</th>
         <th></th>
       </tr>
@@ -17,7 +17,7 @@
       <% @gemblockers.each do |blocker| %>
           <tr>
             <td><%= blocker.gem %></td>
-            <td><%= blocker.version %></td>
+            <td><%= blocked_versions(blocker) %></td>
             <td><%= blocker.verification_type %></td>
             <td><%= link_to "", edit_gemblocker_path(blocker), class: "btn btn-success glyphicon glyphicon-pencil" %></td>
             <td><%= link_to "", gemblocker_path(blocker), :method => :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger glyphicon glyphicon-trash" %></td>

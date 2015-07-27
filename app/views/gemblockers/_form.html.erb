@@ -7,17 +7,19 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <%= f.label :version, class: "col-sm-1 control-label" %>
-        <div class="col-sm-2">
-          <%= f.text_field :version, placeholder: "Version", class: "form-control" %>
-        </div>
+      <div id="#blockedversions">
+        <%= f.fields_for :blockedversions do |blockedversion| %>
+            <%= render "blockedversion_fields", f: blockedversion %>
+            <div class="links">
+              <%= link_to_add_association 'add version', f, :blockedversions %>
+            </div>
+        <% end %>
       </div>
 
       <div class="form-group">
         <%= f.label :verification_type, class: "col-sm-1 control-label" %>
         <div class="col-sm-2">
-          <%= f.select :verification_type, Gemblocker::ALLOWED_TYPES, {}, { class: "form-control" } %>
+          <%= f.select :verification_type, Gemblocker::ALLOWED_TYPES, {}, {class: "form-control"} %>
         </div>
       </div>
 

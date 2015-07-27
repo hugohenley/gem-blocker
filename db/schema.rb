@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150727184533) do
+ActiveRecord::Schema.define(version: 20150727191818) do
+
+  create_table "blockedversions", force: :cascade do |t|
+    t.string   "number",        limit: 255
+    t.integer  "gemblocker_id", limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
 
   create_table "commits", force: :cascade do |t|
     t.string   "hash_id",           limit: 255
