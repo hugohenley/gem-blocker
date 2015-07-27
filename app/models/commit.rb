@@ -3,11 +3,11 @@ class Commit < ActiveRecord::Base
   has_many :used_gems, :dependent => :destroy
 
   def previous
-    self.class.where("id > ?", id).first
+    self.class.where("id < ?", id).last
   end
 
   def next
-    self.class.where("id < ?", id).last
+    self.class.where("id > ?", id).first
   end
 
   def self.already_imported?(commit)

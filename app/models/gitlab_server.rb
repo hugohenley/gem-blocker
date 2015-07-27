@@ -13,7 +13,7 @@ class GitlabServer
   # Last commit comes first
   def project_commits(id)
     begin
-      JSON(RestClient.get GITLAB_WS_URL + "projects/#{id}/repository/commits", {:private_token => GITLAB_TOKEN})
+      JSON(RestClient.get GITLAB_WS_URL + "projects/#{id}/repository/commits", {:private_token => GITLAB_TOKEN}).reverse
     rescue Exception
       return []
     end

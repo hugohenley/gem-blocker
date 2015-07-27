@@ -35,6 +35,7 @@ gem 'twitter-bootstrap-rails'
 
 #Debugger
 gem 'pry'
+gem 'byebug'
 
 #Database
 gem 'mysql2'

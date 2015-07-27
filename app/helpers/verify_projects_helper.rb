@@ -1,0 +1,2 @@
+module VerifyProjectsHelper
+end
