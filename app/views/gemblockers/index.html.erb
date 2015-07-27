@@ -1,0 +1,32 @@
+<%= link_to new_gemblocker_path, class: "btn btn-primary" do %>
+    <span class="glyphicon glyphicon-plus"></span> Add gem
+<% end %>
+
+
+<% unless @gemblockers.empty? %>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Gem</th>
+        <th>Version</th>
+        <th>Type</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @gemblockers.each do |blocker| %>
+          <tr>
+            <td><%= blocker.gem %></td>
+            <td><%= blocker.version %></td>
+            <td><%= blocker.verification_type %></td>
+            <td><%= link_to "", edit_gemblocker_path(blocker), class: "btn btn-success glyphicon glyphicon-pencil" %></td>
+            <td><%= link_to "", gemblocker_path(blocker), :method => :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger glyphicon glyphicon-trash" %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <% else %>
+    <h3>Start blocking undesired gems and be as happy as the dog below!</h3>
+    <%= image_tag "happy-dog.jpg", width: 300, height: 300 %>
+
+<% end %>

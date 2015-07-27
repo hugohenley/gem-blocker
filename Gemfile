@@ -29,6 +29,8 @@ gem 'rest-client'
 gem 'colorize'
 gem 'ruby-progressbar'
 
+gem 'twitter-bootstrap-rails'
+
 #Debugger
 gem 'pry'
 

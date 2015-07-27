@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :projects
   resources :commits
   resources :project_syncs
+  resources :gemblockers
 
 
   # Example of regular route:

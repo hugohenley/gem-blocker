@@ -1,10 +1,14 @@
 class Gemblocker < ActiveRecord::Base
-  belongs_to :rubygem
-  belongs_to :version
 
-  has_many :versionblockers
+  validates_presence_of :gem, :version, :verification_type
+  validate :allowed_types
 
-  def list
+  ALLOWED_TYPES = ["Required", "Deny if present", "Deny"]
+
+  def allowed_types
+    unless ALLOWED_TYPES.include? verification_type
+      errors.add(:verification_type, 'This type is not allowed.')
+    end
   end
 
 end
