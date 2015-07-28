@@ -50,6 +50,7 @@ group :test do
   gem 'database_cleaner'
   gem 'coveralls', require: false
   gem 'simplecov', :require => false
+  gem 'awesome_print'
 end
 
 # Use ActiveModel has_secure_password
