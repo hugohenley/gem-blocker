@@ -8,7 +8,7 @@ default: &default
 development:
   <<: *default
   database: gemblocker_development
-  socket: /tmp/mysql.sock
+#  socket: /tmp/mysql.sock
 
 test:
   <<: *default

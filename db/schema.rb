@@ -70,13 +70,6 @@ ActiveRecord::Schema.define(version: 20150727191818) do
     t.string   "diff",        limit: 255
   end
 
-  create_table "versionblockers", force: :cascade do |t|
-    t.integer  "version_id",    limit: 4
-    t.integer  "gemblocker_id", limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-  end
-
   create_table "versions", force: :cascade do |t|
     t.string   "number",      limit: 255
     t.string   "summary",     limit: 255
