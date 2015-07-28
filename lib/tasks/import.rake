@@ -4,7 +4,20 @@ namespace :gemfile do
     desc "Gemfile Analyzer | Import projects, commits and gems!"
     task create: :environment do
       puts "The operation below can take some minutes depending on the number of Projects, Commits and Gems that
-      are being used in your organization. Maybe it's time to make some coffee... =)".colorize(:light_blue)
+      are being used in your organization. Maybe it's time to make some coffee... (◕‿◕)".colorize(:light_blue)
+
+      puts "
+           .\"\"\"-.
+          /      \\
+          |  _..--'-.
+          >.`__.-"";\"`
+         / /(     ^\\
+         '-`)     =|-.
+          /`--.'--'   \\ .-.
+          .'`-._ `.\\    | J /
+     /      `--.|   \\__/
+".green
+
       sync = Sync.new
 
       puts "Importing Projects".red

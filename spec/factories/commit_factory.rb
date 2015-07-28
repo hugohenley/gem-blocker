@@ -5,5 +5,7 @@ FactoryGirl.define do
     author_name Faker::Name.name
     author_email Faker::Internet.email
     commit_created_at Faker::Time.between(DateTime.now - 1, DateTime.now)
+
+    association :project
   end
 end

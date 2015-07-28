@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150727191818) do
+ActiveRecord::Schema.define(version: 20150728185924) do
 
   create_table "blockedversions", force: :cascade do |t|
     t.string   "number",        limit: 255
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20150727191818) do
 
   create_table "gemblockers", force: :cascade do |t|
     t.string   "gem",               limit: 255
-    t.string   "version",           limit: 255
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.string   "verification_type", limit: 255

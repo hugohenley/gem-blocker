@@ -3,5 +3,7 @@ FactoryGirl.define do
     name "rails"
     version "4.2.3"
     diff "equal"
+
+    association :commit
   end
 end
