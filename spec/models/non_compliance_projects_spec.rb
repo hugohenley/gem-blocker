@@ -14,11 +14,6 @@ describe NonComplianceProjects do
   end
 
   describe "#list" do
-    it "should list the projects that are non compliance to the rules" do
-      expected_return = { "project1": { "required": { "rails": "4.1.0", "json": "1.7.1" },
-                                        "ifpresent": { "cancancan": "1.12.0" }, "denied": { "remarkable": "", "fakeweb": "" } } }
-    end
-
     it "should list the projects that are non compliance to the required rules, one per project" do
       project = FactoryGirl.create :project, name: "Project 1"
       commit = FactoryGirl.create :commit, hash_id: "d179866018c21022006f10061a6db74fe18860ce", project: project
@@ -30,7 +25,8 @@ describe NonComplianceProjects do
       FactoryGirl.create :used_gem, name: "rails", version: "4.0.9", commit: commit2
       FactoryGirl.create :used_gem, name: "json", version: "1.7.7", commit: commit2
 
-      expected_return = [{"Project 1"=>[{:required=>{"json"=>"1.7.6"}}]}, {"Project 2"=>[{:required=>{"rails"=>"4.0.9"}}]}]
+      expected_return = [{"Project 1"=>[{:required=>{"json"=>"1.7.6"}}, {:allow_if_present=>{}}, {:deny=>{}}]},
+                         {"Project 2"=>[{:required=>{"rails"=>"4.0.9"}}, {:allow_if_present=>{}}, {:deny=>{}}]}]
 
       expect(NonComplianceProjects.new.list).to be_eql expected_return
     end
@@ -47,8 +43,8 @@ describe NonComplianceProjects do
       FactoryGirl.create :used_gem, name: "json", version: "1.7.8", commit: commit2
 
 
-      expected_return = [{"Project 1"=>[{:required=>{"rails"=>"4.0.9", "json"=>"1.7.6"}}]},
-                         {"Project 2"=>[{:required=>{"rails"=>"4.2.1", "json"=>"1.7.8"}}]}]
+      expected_return = [{"Project 1"=>[{:required=>{"rails"=>"4.0.9", "json"=>"1.7.6"}}, {:allow_if_present=>{}}, {:deny=>{}}]},
+                         {"Project 2"=>[{:required=>{"rails"=>"4.2.1", "json"=>"1.7.8"}}, {:allow_if_present=>{}}, {:deny=>{}}]}]
 
       expect(NonComplianceProjects.new.list).to be_eql expected_return
     end
@@ -97,8 +93,9 @@ describe NonComplianceProjects do
 
       it "should return nil if all the required gems are compliance" do
         used_gems = {"rails"=>"4.2.3", "json"=>"1.7.7", "newrelic_rpm"=>"3.9.2222", "rake"=>"10.4.2"}
+        expected_hash = {:required=>{}}
 
-        expect(NonComplianceProjects.new.verify_locked_gems(used_gems, :required)).to be nil
+        expect(NonComplianceProjects.new.verify_locked_gems(used_gems, :required)).to be_eql expected_hash
       end
     end
 
@@ -124,8 +121,9 @@ describe NonComplianceProjects do
 
       it "should return nil if all the present gems are compliance" do
         used_gems = {"rails"=>"4.2.2", "json"=>"1.7.6", "newrelic_rpm"=>"3.9.2221", "rake"=>"10.4.2"}
+        expected_hash = {:deny=>{}}
 
-        expect(NonComplianceProjects.new.verify_locked_gems(used_gems, :deny)).to be nil
+        expect(NonComplianceProjects.new.verify_locked_gems(used_gems, :deny)).to be_eql expected_hash
       end
     end
 
@@ -151,8 +149,9 @@ describe NonComplianceProjects do
 
       it "should return nil if all the present gems are compliance" do
         used_gems = {"rails"=>"4.2.3", "json"=>"1.7.7", "newrelic_rpm"=>"3.9.2222", "rake"=>"10.4.2"}
+        expected_hash = {:allow_if_present=>{}}
 
-        expect(NonComplianceProjects.new.verify_locked_gems(used_gems, :allow_if_present)).to be nil
+        expect(NonComplianceProjects.new.verify_locked_gems(used_gems, :allow_if_present)).to be_eql expected_hash
       end
     end
   end
