@@ -1,0 +1,22 @@
+<% unless @projects.empty? %>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Required Gems</th>
+        <th>Allow If Present</th>
+        <th>Denied</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @projects.each do |project| %>
+          <tr>
+            <td><%= project_name(project) %></td>
+            <td><%= locked_gems(project, :required) %></td>
+            <td><%= locked_gems(project, :allow_if_present) %></td>
+            <td><%= locked_gems(project, :deny) %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% end %>
