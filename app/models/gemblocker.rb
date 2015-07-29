@@ -9,7 +9,7 @@ class Gemblocker < ActiveRecord::Base
   validates_presence_of :gem, :verification_type
   validate :allowed_types
 
-  ALLOWED_TYPES = ["Required", "Allow if present", "Deny"]
+  ALLOWED_TYPES = ["Required", "Allow If Present", "Deny"]
 
   def allowed_types
     unless ALLOWED_TYPES.include? verification_type

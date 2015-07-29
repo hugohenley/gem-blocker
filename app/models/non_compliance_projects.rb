@@ -7,7 +7,7 @@ class NonComplianceProjects
       used_gems = last_used_gems_of project
       next if used_gems.nil?
       project_with_gems["#{project.name}"] = []
-      required_gems = verify_required_gems(used_gems)
+      required_gems = verify_locked_gems(used_gems, :required)
       project_with_gems["#{project.name}"] << required_gems
       projects << project_with_gems unless project_with_gems["#{project.name}"].empty?
     end
@@ -26,26 +26,22 @@ class NonComplianceProjects
     hash
   end
 
-  def verify_required_gems(used_gems)
-    blocked_gems = { required: { } }
-    required_gems = Gemblocker.hash_of "Required"
+  def verify_locked_gems(used_gems, type)
+    locked_gems = { type => { } }
+    required_gems = Gemblocker.hash_of type.to_s.titleize
     required_gems.each do |required_gem|
       gem_name = required_gem.keys.first
-      if used_gems[gem_name]
+      if used_gems[gem_name] && type != :deny
         unless required_gem[gem_name].include? used_gems[gem_name]
-          blocked_gems[:required]["#{gem_name}"] = used_gems[gem_name]
+          locked_gems[type]["#{gem_name}"] = used_gems[gem_name]
+        end
+      else
+        if required_gem[gem_name].include? used_gems[gem_name]
+          locked_gems[type]["#{gem_name}"] = used_gems[gem_name]
         end
       end
     end
-    blocked_gems if blocked_gems[:required].any?
-  end
-
-  def verify_allowed_gems(used_gems)
-
-  end
-
-  def verify_denied_gems(used_gems)
-
+    locked_gems if locked_gems[type].any?
   end
 
 

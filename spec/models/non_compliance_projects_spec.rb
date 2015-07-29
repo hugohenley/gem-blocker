@@ -74,25 +74,88 @@ describe NonComplianceProjects do
     end
   end
 
-  describe "#verify_required_gems" do
-    before do
-      gemblocker = FactoryGirl.create :gemblocker, gem: "rails", verification_type: "Required"
-      FactoryGirl.create :blockedversion, number: "4.1.0", gemblocker: gemblocker
-      FactoryGirl.create :blockedversion, number: "4.2.3", gemblocker: gemblocker
+  describe "#verify_locked_gems" do
+    describe "when the type of lock is required" do
+      before do
+        gemblocker = FactoryGirl.create :gemblocker, gem: "rails", verification_type: "Required"
+        FactoryGirl.create :blockedversion, number: "4.1.0", gemblocker: gemblocker
+        FactoryGirl.create :blockedversion, number: "4.2.3", gemblocker: gemblocker
 
-      gemblocker2 = FactoryGirl.create :gemblocker, gem: "json", verification_type: "Required"
-      FactoryGirl.create :blockedversion, number: "1.7.7", gemblocker: gemblocker2
+        gemblocker2 = FactoryGirl.create :gemblocker, gem: "json", verification_type: "Required"
+        FactoryGirl.create :blockedversion, number: "1.7.7", gemblocker: gemblocker2
 
-      gemblocker3 = FactoryGirl.create :gemblocker, gem: "newrelic_rpm", verification_type: "Required"
-      FactoryGirl.create :blockedversion, number: "3.9.2222", gemblocker: gemblocker3
+        gemblocker3 = FactoryGirl.create :gemblocker, gem: "newrelic_rpm", verification_type: "Required"
+        FactoryGirl.create :blockedversion, number: "3.9.2222", gemblocker: gemblocker3
+      end
+
+      it "should return the required gems for a given hash of used gems" do
+        used_gems = {"rails"=>"4.1.2", "json"=>"1.7.7", "newrelic_rpm"=>"3.12.0.288", "rake"=>"10.4.2"}
+        expected_hash = {:required=>{"rails"=>"4.1.2", "newrelic_rpm"=>"3.12.0.288"}}
+
+        expect(NonComplianceProjects.new.verify_locked_gems(used_gems, :required)).to be_eql expected_hash
+      end
+
+      it "should return nil if all the required gems are compliance" do
+        used_gems = {"rails"=>"4.2.3", "json"=>"1.7.7", "newrelic_rpm"=>"3.9.2222", "rake"=>"10.4.2"}
+
+        expect(NonComplianceProjects.new.verify_locked_gems(used_gems, :required)).to be nil
+      end
     end
 
-    it "should return the required gems for a given hash of used gems" do
-      used_gems = {"rails"=>"4.1.2", "json"=>"1.7.7", "newrelic_rpm"=>"3.12.0.288", "rake"=>"10.4.2"}
-      expected_hash = {:required=>{"rails"=>"4.1.2", "newrelic_rpm"=>"3.12.0.288"}}
+    describe "when the type of lock is deny" do
+      before do
+        gemblocker = FactoryGirl.create :gemblocker, gem: "rails", verification_type: "Deny"
+        FactoryGirl.create :blockedversion, number: "4.1.0", gemblocker: gemblocker
+        FactoryGirl.create :blockedversion, number: "4.2.3", gemblocker: gemblocker
 
-      expect(NonComplianceProjects.new.verify_required_gems(used_gems)).to be_eql expected_hash
+        gemblocker2 = FactoryGirl.create :gemblocker, gem: "json", verification_type: "Deny"
+        FactoryGirl.create :blockedversion, number: "1.7.7", gemblocker: gemblocker2
+
+        gemblocker3 = FactoryGirl.create :gemblocker, gem: "newrelic_rpm", verification_type: "Deny"
+        FactoryGirl.create :blockedversion, number: "3.9.2222", gemblocker: gemblocker3
+      end
+
+      it "should return the denied gems for a given hash of used gems" do
+        used_gems = {"rails"=>"4.1.2", "json"=>"1.7.7", "newrelic_rpm"=>"3.12.0.288", "rake"=>"10.4.2"}
+        expected_hash = {:deny=>{"json"=>"1.7.7"}}
+
+        expect(NonComplianceProjects.new.verify_locked_gems(used_gems, :deny)).to be_eql expected_hash
+      end
+
+      it "should return nil if all the present gems are compliance" do
+        used_gems = {"rails"=>"4.2.2", "json"=>"1.7.6", "newrelic_rpm"=>"3.9.2221", "rake"=>"10.4.2"}
+
+        expect(NonComplianceProjects.new.verify_locked_gems(used_gems, :deny)).to be nil
+      end
+    end
+
+    describe "when the type of lock is allow if present" do
+      before do
+        gemblocker = FactoryGirl.create :gemblocker, gem: "rails", verification_type: "Allow If Present"
+        FactoryGirl.create :blockedversion, number: "4.1.0", gemblocker: gemblocker
+        FactoryGirl.create :blockedversion, number: "4.2.3", gemblocker: gemblocker
+
+        gemblocker2 = FactoryGirl.create :gemblocker, gem: "json", verification_type: "Allow If Present"
+        FactoryGirl.create :blockedversion, number: "1.7.7", gemblocker: gemblocker2
+
+        gemblocker3 = FactoryGirl.create :gemblocker, gem: "newrelic_rpm", verification_type: "Allow If Present"
+        FactoryGirl.create :blockedversion, number: "3.9.2222", gemblocker: gemblocker3
+      end
+
+      it "should return the required gems for a given hash of used gems" do
+        used_gems = {"rails"=>"4.1.2", "json"=>"1.7.7", "newrelic_rpm"=>"3.12.0.288", "rake"=>"10.4.2"}
+        expected_hash = {:allow_if_present=>{"rails"=>"4.1.2", "newrelic_rpm"=>"3.12.0.288"}}
+
+        expect(NonComplianceProjects.new.verify_locked_gems(used_gems, :allow_if_present)).to be_eql expected_hash
+      end
+
+      it "should return nil if all the present gems are compliance" do
+        used_gems = {"rails"=>"4.2.3", "json"=>"1.7.7", "newrelic_rpm"=>"3.9.2222", "rake"=>"10.4.2"}
+
+        expect(NonComplianceProjects.new.verify_locked_gems(used_gems, :allow_if_present)).to be nil
+      end
     end
   end
+
 
 end
