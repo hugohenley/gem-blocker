@@ -6,6 +6,7 @@
         <th>Required Gems</th>
         <th>Allow If Present</th>
         <th>Denied</th>
+        <th>Details</th>
       </tr>
       </thead>
       <tbody>
@@ -15,6 +16,7 @@
             <td><%= locked_gems(project, :required) %></td>
             <td><%= locked_gems(project, :allow_if_present) %></td>
             <td><%= locked_gems(project, :deny) %></td>
+            <td><%= details_for project %></td>
           </tr>
       <% end %>
       </tbody>

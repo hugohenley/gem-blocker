@@ -47,7 +47,7 @@ class NonComplianceProjects
         end
       end
     end
-    locked_gems# if locked_gems[type].any?
+    locked_gems
   end
 
 
