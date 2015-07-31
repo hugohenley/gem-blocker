@@ -4,19 +4,25 @@ module VerifyProjectsHelper
     project_hash.keys.first
   end
 
-  def locked_gems(project_hash, type)
-    gems = ""
+  def status_for_type(project_hash, type)
     locked_gems = project_hash.values[0].find { |x| x[type] }
-    if locked_gems[type].empty?
-      return content_tag(:span, "Everything ok!", class: ["label", "label-success"])
-    else
-      locked_gems[type].each do
-        return content_tag(:span, "Failed! :(", class: ["label", "label-danger"])
-        #gems += "#{key} => #{value}\n"
-        #gems
+    locked_gems[type].empty? ? true : false
+  end
+
+  def status project_hash
+    final_status = true
+    types = Gemblocker::VERIFIED_TYPES.map { |x| x.downcase.tr(" ", "_").to_sym.downcase }
+    types.each do |type|
+      unless status_for_type(project_hash, type)
+        final_status = false
       end
     end
-    #gems
+
+    if final_status
+      return content_tag(:span, "Everything ok!", class: ["label", "label-success"])
+    else
+      return content_tag(:span, "Failed! :(", class: ["label", "label-danger"])
+    end
   end
 
   def actual_blocker_version(gem_name)

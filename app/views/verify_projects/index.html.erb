@@ -3,10 +3,7 @@
       <thead>
       <tr>
         <th>Name</th>
-        <th>Required Gems</th>
-        <th>Allow If Present</th>
-        <th>Denied</th>
-        <th>Not Present</th>
+        <th>Status</th>
         <th>Details</th>
         <th></th>
       </tr>
@@ -15,10 +12,7 @@
       <% @projects.each do |project_hash| %>
           <tr>
             <td><%= project_name(project_hash) %></td>
-            <td><%= locked_gems(project_hash, :required) %></td>
-            <td><%= locked_gems(project_hash, :allow_if_present) %></td>
-            <td><%= locked_gems(project_hash, :deny) %></td>
-            <td><%= locked_gems(project_hash, :not_present) %></td>
+            <td width="30%"><%= status(project_hash) %></td>
             <td><%= details_for project_hash %></td>
             <td>
               <% unless details_for(project_hash).empty? %>
