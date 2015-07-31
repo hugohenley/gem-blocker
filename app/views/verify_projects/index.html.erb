@@ -6,20 +6,22 @@
         <th>Required Gems</th>
         <th>Allow If Present</th>
         <th>Denied</th>
+        <th>Not Present</th>
         <th>Details</th>
         <th></th>
       </tr>
       </thead>
       <tbody>
-      <% @projects.each do |project| %>
+      <% @projects.each do |project_hash| %>
           <tr>
-            <td><%= project_name(project) %></td>
-            <td><%= locked_gems(project, :required) %></td>
-            <td><%= locked_gems(project, :allow_if_present) %></td>
-            <td><%= locked_gems(project, :deny) %></td>
-            <td><%= details_for project %></td>
+            <td><%= project_name(project_hash) %></td>
+            <td><%= locked_gems(project_hash, :required) %></td>
+            <td><%= locked_gems(project_hash, :allow_if_present) %></td>
+            <td><%= locked_gems(project_hash, :deny) %></td>
+            <td><%= locked_gems(project_hash, :not_present) %></td>
+            <td><%= details_for project_hash %></td>
             <td>
-              <% unless details_for(project).empty? %>
+              <% unless details_for(project_hash).empty? %>
                   <%= link_to "Send email", "#", class: "btn btn-info" %>
               <% end %>
             </td>

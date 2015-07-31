@@ -29,7 +29,7 @@ module VerifyProjectsHelper
 
   def details_for(project_hash)
     errors = ""
-    types = Gemblocker::ALLOWED_TYPES.map { |x| x.downcase.tr(" ", "_").to_sym.downcase }
+    types = Gemblocker::VERIFIED_TYPES.map { |x| x.downcase.tr(" ", "_").to_sym.downcase }
     types.each do |type|
       locked_gems = project_hash.values[0].find { |x| x[type] }
       unless locked_gems[type].empty?

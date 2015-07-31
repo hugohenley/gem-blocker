@@ -53,16 +53,12 @@ class Sync
           found = locked_gems.detect { |x| x[used_gem.name] }
           if found && type == "Deny"
             locked_versions = found[used_gem.name].join(", ")
-            puts "Projeto: #{used_gem.commit.project.name}"
-            puts "Achou a gem: #{used_gem.name} com versao #{used_gem.version} - Tipo: #{type}"
-            #TODO: Change table name to LockedInfo
             Status.new(used_gem_id: used_gem.id, lock_type: type, locked_versions: locked_versions).save
-          elsif found && !found[used_gem.name].include?(used_gem.version) && type == "Allow If Present"
+          elsif found && !found[used_gem.name].include?(used_gem.version) && (type == "Allow If Present" || type == "Required")
             locked_versions = found[used_gem.name].join(", ")
-            puts "Projeto: #{used_gem.commit.project.name}"
-            puts "Achou a gem: #{used_gem.name} com versao #{used_gem.version} - Tipo: #{type}"
-            puts "Locked Versions: #{locked_versions}"
             Status.new(used_gem_id: used_gem.id, lock_type: type, locked_versions: locked_versions).save
+          elsif (!locked_gems.map {|x| x.keys.first}.include? used_gem.name) && type == :required
+            Status.new(used_gem_id: used_gem.id, lock_type: "Not Present", locked_versions: locked_versions).save
           end
         end
       end

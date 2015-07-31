@@ -11,6 +11,8 @@ class Gemblocker < ActiveRecord::Base
 
   ALLOWED_TYPES = ["Required", "Allow If Present", "Deny"]
 
+  VERIFIED_TYPES = ["Required", "Allow If Present", "Deny", "Not Present"]
+
   def allowed_types
     unless ALLOWED_TYPES.include? verification_type
       errors.add(:verification_type, 'This type is not allowed.')
