@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  used_gem: 
+  type: 
+  locked_versions: MyString
+
+two:
+  used_gem: 
+  type: 
+  locked_versions: MyString

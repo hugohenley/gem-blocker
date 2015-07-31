@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728185924) do
+ActiveRecord::Schema.define(version: 20150730042245) do
 
   create_table "blockedversions", force: :cascade do |t|
     t.string   "number",        limit: 255
@@ -55,6 +55,14 @@ ActiveRecord::Schema.define(version: 20150728185924) do
     t.string   "current_version", limit: 255
     t.string   "authors",         limit: 255
     t.string   "info",            limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.integer  "used_gem_id",     limit: 4
+    t.string   "lock_type",       limit: 255
+    t.string   "locked_versions", limit: 255
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end

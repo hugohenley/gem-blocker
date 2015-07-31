@@ -46,6 +46,9 @@ class NonComplianceProjects
         unless required_gem[gem_name].include? used_gems[gem_name]
           locked_gems[type]["#{gem_name}"] = used_gems[gem_name]
         end
+      elsif !used_gems[gem_name] && type == :required
+        locked_gems[:not_present] = {}
+        locked_gems[:not_present]["#{gem_name}"] = required_gem[gem_name]
       else
         if required_gem[gem_name].include? used_gems[gem_name]
           locked_gems[type]["#{gem_name}"] = used_gems[gem_name]

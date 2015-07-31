@@ -7,6 +7,7 @@
         <th>Allow If Present</th>
         <th>Denied</th>
         <th>Details</th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
@@ -17,6 +18,11 @@
             <td><%= locked_gems(project, :allow_if_present) %></td>
             <td><%= locked_gems(project, :deny) %></td>
             <td><%= details_for project %></td>
+            <td>
+              <% unless details_for(project).empty? %>
+                  <%= link_to "Send email", "#", class: "btn btn-info" %>
+              <% end %>
+            </td>
           </tr>
       <% end %>
       </tbody>

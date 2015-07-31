@@ -42,4 +42,31 @@ class Sync
     end
   end
 
+  def set_compliance_status
+    Project.all.each do |project|
+      next if project.commits.empty?
+      used_gems = project.commits.last.used_gems
+      used_gems.each do |used_gem|
+        next if used_gem.status
+        Gemblocker::ALLOWED_TYPES.each do |type|
+          locked_gems = Gemblocker.hash_of type
+          found = locked_gems.detect { |x| x[used_gem.name] }
+          if found && type == "Deny"
+            locked_versions = found[used_gem.name].join(", ")
+            puts "Projeto: #{used_gem.commit.project.name}"
+            puts "Achou a gem: #{used_gem.name} com versao #{used_gem.version} - Tipo: #{type}"
+            #TODO: Change table name to LockedInfo
+            Status.new(used_gem_id: used_gem.id, lock_type: type, locked_versions: locked_versions).save
+          elsif found && !found[used_gem.name].include?(used_gem.version) && type == "Allow If Present"
+            locked_versions = found[used_gem.name].join(", ")
+            puts "Projeto: #{used_gem.commit.project.name}"
+            puts "Achou a gem: #{used_gem.name} com versao #{used_gem.version} - Tipo: #{type}"
+            puts "Locked Versions: #{locked_versions}"
+            Status.new(used_gem_id: used_gem.id, lock_type: type, locked_versions: locked_versions).save
+          end
+        end
+      end
+    end
+  end
+
 end

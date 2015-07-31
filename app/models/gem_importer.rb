@@ -34,4 +34,13 @@ class GemImporter
     commits
   end
 
+
+
+  def project_compliance?(project_hash)
+    project_hash.values[0].each do |type|
+      return false if type.values.first.any?
+    end
+    true
+  end
+
 end

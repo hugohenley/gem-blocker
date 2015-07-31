@@ -1,6 +1,8 @@
 class Commit < ActiveRecord::Base
   belongs_to :project
-  has_many :used_gems, :dependent => :destroy
+  has_many :used_gems, :dependent => :delete_all
+
+  scope :with_failure, -> { joins(:used_gems => :status ) }
 
   def previous
     self.class.where("id < ?", id).last

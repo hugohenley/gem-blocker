@@ -1,5 +1,6 @@
 class UsedGem < ActiveRecord::Base
   belongs_to :commit
+  has_one :status, :dependent => :delete
 
   def self.to_hash!(all_gems)
     hash = {}
