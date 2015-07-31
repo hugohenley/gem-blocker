@@ -28,17 +28,35 @@ module VerifyProjectsHelper
   end
 
   def details_for(project_hash)
-    errors = ""
+    message = ""
+    required = []
+    allow_if_present = []
+    not_present = []
+    deny = []
     types = Gemblocker::VERIFIED_TYPES.map { |x| x.downcase.tr(" ", "_").to_sym.downcase }
     types.each do |type|
       locked_gems = project_hash.values[0].find { |x| x[type] }
       unless locked_gems[type].empty?
         locked_gems[type].each do |key, value|
-          errors += "#{key} => #{value}\n"
+          errors = "#{key} -> (#{value})"
+          case type
+            when :required
+              required << errors
+            when :allow_if_present
+              allow_if_present << errors
+            when :not_present
+              not_present << errors
+            when :deny
+              deny << errors
+          end
         end
       end
     end
-    errors
+    message += "The following gems are present but are in the wrong version: #{required.join(", ")}, please update.\n" unless required.empty?
+    message += "The following gems are allowed but are in the wrong version: #{allow_if_present.join(", ")}, please update.\n" unless allow_if_present.empty?
+    message += "The following gems are required but not present: #{not_present.join(", ")}, please include them.\n" unless not_present.empty?
+    message += "The following gems are not allowed: #{deny.join(", ")}, please exclude them.\n" unless deny.empty?
+    message
   end
 
 end
