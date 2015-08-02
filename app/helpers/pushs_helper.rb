@@ -1,0 +1,2 @@
+module PushsHelper
+end

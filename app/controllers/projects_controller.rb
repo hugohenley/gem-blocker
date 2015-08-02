@@ -22,4 +22,10 @@ class ProjectsController < ApplicationController
     end
   end
 
+  private
+  def project_params
+    #params.require(:gemblocker).permit(:gem, :verification_type, blockedversions_attributes: [:id, :number, :_destroy])
+  end
+
+
 end
