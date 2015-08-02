@@ -16,7 +16,7 @@ class ProjectHookParser
   end
 
   def add_ssh_http_info
-    project_info = GitlabServer.new(@gitlab_id).project_info
+    project_info = GitlabServer.new.project_info((@gitlab_id))
     return project_info["ssh_url_to_repo"], project_info["http_url_to_repo"]
   end
 
