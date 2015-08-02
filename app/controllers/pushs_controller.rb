@@ -4,9 +4,9 @@ class PushsController < ApplicationController
     hook_params = PushHookParser.new(params)
     @commit = Push.new(hook_params)
     if @commit.save
-      redirect_to projects_path, notice: 'Projecto criado com sucesso!'
+      render :nothing => true, :status => :ok
     else
-      render :new
+      render :nothing => true, :status => :internal_server_error
     end
   end
 

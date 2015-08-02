@@ -16,9 +16,9 @@ class ProjectsController < ApplicationController
     hook_params = ProjectHookParser.new(params).to_param!
     @project = Project.new(hook_params)
     if @project.save
-      redirect_to projects_path, notice: 'Projecto criado com sucesso!'
+      render :nothing => true, :status => :ok
     else
-      render :new
+      render :nothing => true, :status => :internal_server_error
     end
   end
 
