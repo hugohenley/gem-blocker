@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe PushHookParser do
+describe PushHook do
   describe '#save!' do
     before do
       @params = {
@@ -47,14 +47,14 @@ describe PushHookParser do
       @project = FactoryGirl.create :project, gitproject_id: 15
     end
     it 'should save the commits sent on push' do
-      push = PushHookParser.new(@params)
+      push = PushHook.new(@params)
       push.save!
 
       expect(Commit.count).to be 2
     end
 
     it 'should save details for each commit' do
-      push = PushHookParser.new(@params)
+      push = PushHook.new(@params)
       push.save!
 
       first_commit = Commit.first

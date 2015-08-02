@@ -1,4 +1,4 @@
-class PushHookParser
+class PushHook
   attr_reader :title, :author_name, :author_email, :commit_created_at, :git_project_id, :commits
 
   def initialize params

@@ -1,7 +1,7 @@
 class PushsController < ApplicationController
 
   def create
-    hook_params = PushHookParser.new(params)
+    hook_params = PushHook.new(params)
     @push = Push.new(hook_params)
     if @push.save
       render :nothing => true, :status => :ok
