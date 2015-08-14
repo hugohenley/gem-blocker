@@ -11,7 +11,7 @@ class GitServer
   end
 
   def project_info(type)
-    to_class(type).new.project_info(@commit_sha)
+    to_class(type).new.project_info(@id)
   end
 
   def project_commits(type)

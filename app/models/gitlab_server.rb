@@ -7,7 +7,7 @@ class GitlabServer
   end
 
   def project_info(id)
-    RestClient.get GITLAB_WS_URL + "projects/#{id}", {:private_token => GITLAB_TOKEN}
+    JSON(RestClient.get GITLAB_WS_URL + "projects/#{id}", {:private_token => GITLAB_TOKEN})
   end
 
   # Last commit comes first

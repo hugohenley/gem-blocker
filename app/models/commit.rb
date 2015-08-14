@@ -1,6 +1,6 @@
 class Commit < ActiveRecord::Base
   belongs_to :project
-  has_many :used_gems, :dependent => :delete_all
+  has_many :used_gems, :dependent => :destroy
 
   scope :with_failure, -> { joins(:used_gems => :status ) }
 
