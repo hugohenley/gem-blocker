@@ -37,8 +37,9 @@ class Sync
     Commit.all.each do |commit|
       $progress.increment
       project_id = commit.gitproject_id
-      commits = GitServer.new(project_id).project_commits(commit.commit_server)
-      GemImporter.new(project_id, commit, commits, commit.commit_server).import
+      #commits = GitServer.new(project_id).project_commits(commit.commit_server)
+      #GemImporter.new(project_id, commit, commits, commit.commit_server).import
+      GemImporter.new(project_id, commit, commit.commit_server).import
     end
   end
 
