@@ -48,6 +48,9 @@ describe PushHook do
     end
     it 'should save the commits sent on push' do
       push = PushHook.new(@params)
+      gemimporter = double('gemimporter')
+      allow(GemImporter).to receive(:new).and_return(gemimporter)
+      allow(gemimporter).to receive(:import).and_return(true)
       push.save!
 
       expect(Commit.count).to be 2
@@ -55,19 +58,22 @@ describe PushHook do
 
     it 'should save details for each commit' do
       push = PushHook.new(@params)
+      gemimporter = double('gemimporter')
+      allow(GemImporter).to receive(:new).and_return(gemimporter)
+      allow(gemimporter).to receive(:import).and_return(true)
       push.save!
 
       first_commit = Commit.first
       last_commit = Commit.last
-      expect(first_commit.author_name).to be_eql "John Smith"
-      expect(first_commit.author_email).to be_eql "john@example.com"
+      expect(first_commit.author_name).to be_eql "Jordi Mallach"
+      expect(first_commit.author_email).to be_eql "jordi@softcatala.org"
       expect(first_commit.project_id).to be_eql @project.id
       expect(first_commit.hash_id).to be_eql "b6568db1bc1dcd7f8b4d5a946b0b91f9dacd7327"
       expect(first_commit.commit_created_at.to_s).to be_eql "2011-12-12 12:27:31 UTC"
       expect(first_commit.title).to be_eql "Update Catalan translation to e38cb41."
 
-      expect(last_commit.author_name).to be_eql "John Smith"
-      expect(last_commit.author_email).to be_eql "john@example.com"
+      expect(last_commit.author_name).to be_eql "GitLab dev user"
+      expect(last_commit.author_email).to be_eql "gitlabdev@dv6700.(none)"
       expect(last_commit.project_id).to be_eql @project.id
       expect(last_commit.hash_id).to be_eql "da1560886d4f094c3e6c9ef40349f7d38b5d27d7"
       expect(last_commit.commit_created_at.to_s).to be_eql "2012-01-03 21:36:29 UTC"

@@ -63,12 +63,11 @@ class NonComplianceProjects
     required_gems = Gemblocker.hash_of type.to_s.titleize
     required_gems.each do |required_gem|
       gem_name = required_gem.keys.first
-        if !used_gems.keys.include? gem_name
-          locked_gems[:not_present]["#{gem_name}"] = required_gem[gem_name]
-        end
+      if !used_gems.keys.include? gem_name
+        locked_gems[:not_present]["#{gem_name}"] = required_gem[gem_name]
+      end
     end
     locked_gems
   end
-
 
 end

@@ -1,10 +1,9 @@
 class ProjectHookParser
-  attr_accessor :name, :gitlab_id, :path, :path_namespace
+  attr_accessor :name, :gitlab_id
 
   def initialize(params)
     @name = params["name"]
     @gitlab_id = params["id"]
-    @path_namespace = params["path_with_namespace"]
   end
 
   def to_param!
