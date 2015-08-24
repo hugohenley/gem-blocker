@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :gemblockers
   resources :verify_projects
 
+  get 'project_status' => 'verify_projects#status'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

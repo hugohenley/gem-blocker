@@ -44,7 +44,7 @@ module VerifyProjectsHelper
       locked_gems = project_hash.values[0].find { |x| x[type] }
       unless locked_gems[type].empty?
         locked_gems[type].each do |key, value|
-          errors = "#{key} -> (#{value})"
+          errors = "#{key} (#{value}) -> (#{blocked_versions_for key})"
           case type
             when :required
               required << errors
@@ -63,6 +63,14 @@ module VerifyProjectsHelper
     message += "The following gems are required but not present: #{not_present.join(", ")}, please include them.\n" unless not_present.empty?
     message += "The following gems are not allowed: #{deny.join(", ")}, please exclude them.\n" unless deny.empty?
     message
+  end
+
+  def blocked_versions_for gem
+    versions = []
+    Gemblocker.where(gem: gem).take.blockedversions.each do |version|
+      versions << version.number
+    end
+    versions.join(", ")
   end
 
 end
